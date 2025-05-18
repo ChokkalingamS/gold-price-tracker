@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 
 const config = require('../config/config');
+const logger = require('../config/logger');
 const { getAllChatIds } = require('./chat.service');
 const { bot } = require('./telegram.service');
 
@@ -64,6 +65,8 @@ const sendAlerts = async () => {
       for (const chatId of chatIds) {
         await bot.telegram.sendMessage(chatId, message);
       }
+
+      logger.info('Price alert sent successfully',message);
     }
   } catch (error) { 
     console.log(error);

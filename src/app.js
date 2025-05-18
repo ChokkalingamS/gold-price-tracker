@@ -14,6 +14,7 @@ const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const { bot } = require('./services/telegram.service');
 const ApiError = require('./utils/ApiError');
+const { scheduleGoldPriceUpdates } = require('./services/cron.service');
 
 const app = express();
 
@@ -51,7 +52,8 @@ if (config.env === 'production') {
   app.use('/v1/auth', authLimiter);
 }
 
-app.use(bot.webhookCallback('/telegram/webhooks'));
+scheduleGoldPriceUpdates();
+
 // v1 api routes
 app.use('/v1', routes);
 

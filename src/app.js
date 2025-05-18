@@ -12,6 +12,7 @@ const { jwtStrategy } = require('./config/passport');
 const { authLimiter } = require('./middlewares/rateLimiter');
 const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
+const { bot } = require('./services/telegram.service');
 const ApiError = require('./utils/ApiError');
 
 const app = express();
@@ -50,6 +51,7 @@ if (config.env === 'production') {
   app.use('/v1/auth', authLimiter);
 }
 
+app.use(bot.webhookCallback('/telegram/webhooks'));
 // v1 api routes
 app.use('/v1', routes);
 

@@ -13,18 +13,22 @@ const bot = new Telegraf(apiToken || "");
 bot.start(async (ctx) => {
   const username = ctx.message.from.username;
   const chatId = ctx.message.chat.id;
-  console.log(chatId)
+  console.log(chatId);
   saveChatId(chatId);
-    // const webAppUrlWithUsername = `${webAppUrl}?username=${username}`;
-    // const imageUrl = `${webAppUrl}/assets/images/pluscoin.png`;
-    const description = `
-Hi, @${username || ctx.message.from.first_name}
 
-  `;
-  
+  const description = `
+✨ Welcome aboard, *${username || ctx.message.from.first_name}!* ✨
+
+🎉 Glad to have you here with us!
+
+💰 Get ready to receive your **daily gold price alerts** straight to this chat. Stay updated and never miss a beat on the latest retail gold rates in India 🇮🇳.
+
+⏰ Alerts will come twice a day — morning and evening.
+
+Happy investing! 💛
+`;
+
   ctx.reply(description);
-  
-    
 });
 
 

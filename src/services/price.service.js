@@ -47,9 +47,9 @@ const sendAlerts = async () => {
       const message = `
 🌟 Daily Gold Price Alert – India 🇮🇳 🌟
 
-📅 Date: ${new Date().toLocaleDateString('en-IN', { year: 'numeric', month: '2-digit', day: '2-digit' })}
+📅 Date: ${new Date().toLocaleDateString('en-IN', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Asia/Kolkata' })}
 
-⏰ Time: ${new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+⏰ Time: ${new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' })}
 
 📍 Location: India
 
@@ -62,6 +62,7 @@ const sendAlerts = async () => {
       `;
 
       const chatIds = await getAllChatIds();
+      logger.info('Chat IDs:', chatIds);
       for (const chatId of chatIds) {
         await bot.telegram.sendMessage(chatId, message);
       }
